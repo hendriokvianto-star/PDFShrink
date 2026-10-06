@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "pdfshrink"
+version = "1.0.0"
+description = "Offline PDF compressor for Windows — compress PDFs to a target size range"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "PDF Shrink Team"}
+]
+dependencies = [
+    "customtkinter>=5.2",
+    "pikepdf>=8.0",
+    "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "reportlab>=4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --tb=short"
+# Temporarily allow empty test collection for M1 gate check.
+# Remove this override once M3 adds real tests.
+empty_parameter_set_mark = "skip"
+
+[tool.coverage.run]
+source = ["pdfshrink/core"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
